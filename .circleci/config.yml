@@ -53,7 +53,7 @@ workflows:
     # Run the welcomePapy/run job in its own container
     jobs:
       - save_hello_world_output
-      - print_output_file
+      - print_output_file:
           requires: #requires the below stage to run before it runs the second stage
             - save_hello_world_output
       # - welcomePapy/run
