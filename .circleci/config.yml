@@ -15,7 +15,7 @@ jobs: # planning to run some jobs
       - image: circleci/node:13.8.0
     steps:
       - run: echo "Good morning Walexkino!"
-  print_world: # the name of the jobs
+  print_cruise: # the name of the jobs
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -27,6 +27,6 @@ workflows:
     jobs:
       - welcome/run
       - print_hello
-      - print_world:
+      - print_cruise:
           requires:
             - print_hello
