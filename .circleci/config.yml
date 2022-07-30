@@ -25,6 +25,12 @@ jobs: # planning to run some jobs
     steps:
       - run: echo "We hope you enjoy your stay here. " # the run command for the jobs
 
+  
+  Print_varChar
+    docker:
+      - image: cimg/base:2021.11
+    steps:
+      - run: echo "$MY_FIRST_CAR is my first car. "
 workflows:
   # Name the workflow "welcomePapy"
   welcomePapy:
@@ -32,6 +38,7 @@ workflows:
     jobs:
       - welcomePapy/run
       - print_hello
+      - print_varChar
       - print_cruise:
           requires:
             - print_hello
