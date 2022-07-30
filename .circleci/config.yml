@@ -30,7 +30,13 @@ jobs: # planning to run some jobs
     docker:
       - image: cimg/base:2021.11
     steps:
-      - run: echo "$MY_FIRST_CAR is my first car."  
+      - checkout:
+      
+      - run: 
+          name: "it echoes the env var that i decleared in the circleci "
+          command: |
+            echo "$MY_FIRST_CAR is my first car."  
+
 workflows:
   # Name the workflow "welcomePapy"
   welcomePapy:
