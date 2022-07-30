@@ -30,7 +30,7 @@ jobs: # planning to run some jobs
     docker:
       - image: cimg/base:2021.11
     steps:
-      - run: echo "$MY_FIRST_CAR is my first car. "
+      - run: echo $MY_FIRST_CAR " is my first car.  
 workflows:
   # Name the workflow "welcomePapy"
   welcomePapy:
