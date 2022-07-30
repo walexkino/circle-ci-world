@@ -35,7 +35,7 @@ jobs: # planning to run some jobs
       - run: 
           name: "it echoes the env var that i decleared in the circleci "
           command: |
-            echo "$MY_FIRST_CAR is my first car."  
+            echo "$CIRCLE_PROJECT_USERNAME is my first car."  
 
 workflows:
   # Name the workflow "welcomePapy"
