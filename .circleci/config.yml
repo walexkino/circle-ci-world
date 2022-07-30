@@ -11,27 +11,26 @@ orbs:
 
 jobs: # planning to run some jobs
 
-#first jobs
-  print_hello: # name of jobs
+#first job
+  print_hello: # name of the stages
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: echo "Good morning Walexkino!"
 
 #second jobs more of like a multi-stage piple line
-  print_cruise: # the name of the jobs
+  print_cruise: # the name of the stage 2
     docker:
       - image: circleci/node:13.8.0 #docker imagine
     steps:
       - run: echo "We hope you enjoy your stay here. " # the run command for the jobs
 
 workflows:
-  # Name the workflow "welcomen"
+  # Name the workflow "welcomePapy"
   welcomePapy:
     # Run the welcomePapy/run job in its own container
     jobs:
-      - welcomePapy/run
+  
       - print_hello
       - print_cruise:
-          requires:
-            - print_hello
+          
