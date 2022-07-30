@@ -26,7 +26,7 @@ jobs: # planning to run some jobs
       - run: echo "We hope you enjoy your stay here. " # the run command for the jobs
 
   
-  Print_varChar
+  print_varChar:
     docker:
       - image: cimg/base:2021.11
     steps:
