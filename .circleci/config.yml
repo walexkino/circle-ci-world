@@ -9,19 +9,18 @@ version: 2.1
   
 # # Orchestrate or schedule a set of jobs
 
+commands:
+  print_pipeline_id:
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+
 jobs: # planning to run some jobs
 
-
-  print_pipeline_id:
+  my_job: 
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: 
-          name: "it echoes the env var that i decleared"
-          command: |
-            echo "$CIRCLE_WORKFLOW_ID"  
-
-
+      - print_pipleline_id
 #first job
   save_hello_world_output: # name of the stages
     docker:
@@ -63,7 +62,8 @@ workflows:
   my_workflow:
     # Run the welcomePapy/run job in its own container
     jobs:
-      - print_pipeline_id:
+  
+      - my_job
       - save_hello_world_output
       - print_output_file:
           requires: #requires the below stage to run before it runs the second stage
