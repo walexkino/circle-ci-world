@@ -30,7 +30,8 @@ workflows:
   welcomePapy:
     # Run the welcomePapy/run job in its own container
     jobs:
-  
+      - welcomePapy/run
       - print_hello
       - print_cruise:
-          
+          requires:
+            - print_hello
