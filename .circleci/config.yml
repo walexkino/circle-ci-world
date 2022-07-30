@@ -1,48 +1,64 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
+# # Use a package of configuration called an orb.
+# orbs:
+#   # Declare a dependency on the welcome-orb
 
-  welcomePapy: circleci/welcome-orb@0.4.1
+#   welcomePapy: circleci/welcome-orb@0.4.1
   
-# Orchestrate or schedule a set of jobs
+# # Orchestrate or schedule a set of jobs
 
 jobs: # planning to run some jobs
 
 #first job
-  print_hello: # name of the stages
+  save_hello_world_output: # name of the stages
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "Good morning Walexkino!"
+      - run: echo "Good morning Walexkino!" > ~/output.txt
+      - persist_to_workspace: #set a persist workspace that the file can be stored temporarily
+          root: ~/
+          paths:
+            - output.txt
 
-#second jobs more of like a multi-stage piple line
-  print_cruise: # the name of the stage 2
+  print_output_file
     docker:
-      - image: circleci/node:13.8.0 #docker imagine
+      - image: circleci/node:13.8.0
     steps:
-      - run: echo "We hope you enjoy your stay here. " # the run command for the jobs
+      - attach_workspace: # it attaches the workspace that was declared in the previous jobs so they communicate more like a temp thing
+          at: ~/
+      - run: cat ~/output.txt
+
+# #second jobs more of like a multi-stage piple line
+#   print_cruise: # the name of the stage 2
+#     docker:
+#       - image: circleci/node:13.8.0 #docker imagine
+#     steps:
+#       - run: echo "We hope you enjoy your stay here. " # the run command for the jobs
 
   
-  print_varChar:
-    docker:
-      - image: cimg/base:2021.11
-    steps:
-      - run: 
-          name: "it echoes the env var that i decleared in the circleci "
-          command: |
-            echo "$MY_FIRST_CAR is my first car."  
+#   print_varChar:
+#     docker:
+#       - image: cimg/base:2021.11
+#     steps:
+#       - run: 
+#           name: "it echoes the env var that i decleared in the circleci "
+#           command: |
+#             echo "$MY_FIRST_CAR is my first car."  
 
 workflows:
   # Name the workflow "welcomePapy"
-  welcomePapy:
+  my_workflow:
     # Run the welcomePapy/run job in its own container
     jobs:
-      - welcomePapy/run
-      - print_hello
-      - print_varChar
-      - print_cruise:
-          requires:
-            - print_hello
+      - save_hello_world_output
+      - print_output_file
+          requires: #requires the below stage to run before it runs the second stage
+            - save_hello_world_output
+      # - welcomePapy/run
+      # - print_hello
+      # - print_varChar
+      # - print_cruise:
+      #     requires:
+      #       - print_hello
