@@ -30,8 +30,6 @@ jobs: # planning to run some jobs
     docker:
       - image: cimg/base:2021.11
     steps:
-      - checkout:
-      
       - run: 
           name: "it echoes the env var that i decleared in the circleci "
           command: |
