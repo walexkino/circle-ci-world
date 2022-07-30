@@ -14,7 +14,7 @@ jobs: # planning to run some jobs
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "Good mornng Walexkino!"
+      - run: echo "Good morning Walexkino!"
 
 jobs:
   print_world: # the name of the jobs
