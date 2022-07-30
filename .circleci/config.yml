@@ -3,25 +3,27 @@ version: 2.1
 # Use a package of configuration called an orb.
 orbs:
   # Declare a dependency on the welcome-orb
-
   welcome: circleci/welcome-orb@0.4.1
-  
 # Orchestrate or schedule a set of jobs
-
-jobs: # planning to run some jobs
-  print_hello: # name of jobs
+jobs:
+  print_hello:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "Good morning Walexkino!"
-       
-  print_world: # the name of the jobs
-      - run: echo "We hope you enjoy your stay here. " # the run command for the jobs
-
+      - run: echo hello
+  print_world:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo world
 workflows:
-  # Name the workflow "welcomen"
+  # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
     jobs:
-      - print_hello/run
-      - print_world/run
+      - welcome/run
+      - print_hello
+      - print_world:
+          requires:
+            - print_hello
+;
