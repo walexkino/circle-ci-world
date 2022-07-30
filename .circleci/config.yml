@@ -15,8 +15,7 @@ jobs: # planning to run some jobs
       - image: circleci/node:13.8.0
     steps:
       - run: echo "Good morning Walexkino!"
-
-jobs:
+      
   print_world: # the name of the jobs
       - run: echo "We hope you enjoy your stay here. " # the run command for the jobs
 
